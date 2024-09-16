@@ -39,7 +39,7 @@ EXPOSE 5005
 
 # # Use the start script to run both Rasa and Flask
 # # Set the entrypoint to start.sh
-# ENTRYPOINT ["/app/start.sh"]
+ENTRYPOINT ["/app/start.sh"]
 
 # Use the entrypoint script to start the services
-ENTRYPOINT ["/app/start.sh"]
+# ENTRYPOINT ["/app/start.sh"]

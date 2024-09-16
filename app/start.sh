@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Start the Flask app
-gunicorn --bind 0.0.0.0:5000 app:app &
+# Start Rasa server in the background
+rasa run -m /app/rasa/models --enable-api --cors '*' &
 
-# Start the Rasa server
-rasa run --model /app/rasa/models --port 5005
+# Start Flask app
+python /app/flask-app/app.py
