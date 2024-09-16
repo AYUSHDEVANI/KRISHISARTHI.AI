@@ -21,6 +21,9 @@ RUN /app/venv/bin/python -m pip install --upgrade pip && \
 # Make sure the virtual environment is used by default
 ENV PATH="/app/venv/bin:$PATH"
 
+# Switch to root user to change permissions
+USER root
+
 # Copy the start script into the container
 COPY start.sh /app/start.sh
 
