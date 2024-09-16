@@ -25,7 +25,7 @@ RUN /app/venv/bin/python -m pip install --upgrade pip && \
 ENV PATH="/app/venv/bin:$PATH"
 
 # Switch to root user to change permissions
-USER root
+# USER root
 
 # Copy the start script into the container
 COPY start.sh /app/start.sh
@@ -41,5 +41,5 @@ EXPOSE 5005
 # # Set the entrypoint to start.sh
 # ENTRYPOINT ["/app/start.sh"]
 
-# Run the Flask application and Rasa server
-CMD ["sh", "-c", "gunicorn --bind 0.0.0.0:5000 app:app & rasa run --model /app/rasa/models --port 5005"]
+# Use the entrypoint script to start the services
+ENTRYPOINT ["/app/start.sh"]
