@@ -37,6 +37,9 @@ RUN chmod +x /app/start.sh
 EXPOSE 5000  
 EXPOSE 5005  
 
-# Use the start script to run both Rasa and Flask
-# Set the entrypoint to start.sh
-ENTRYPOINT ["/app/start.sh"]
+# # Use the start script to run both Rasa and Flask
+# # Set the entrypoint to start.sh
+# ENTRYPOINT ["/app/start.sh"]
+
+# Run the Flask application and Rasa server
+CMD ["sh", "-c", "gunicorn --bind 0.0.0.0:5000 app:app & rasa run --model /app/rasa/models --port 5005"]
