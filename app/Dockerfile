@@ -8,7 +8,7 @@ WORKDIR /app
 COPY ./rasa /app/rasa
 
 # Install additional Python dependencies for your Flask app
-COPY ./flask-app /app/flask-app
+COPY app/flask-app /app/flask-app
 RUN pip install -r /app/flask-app/requirements.txt
 
 # Expose necessary ports
