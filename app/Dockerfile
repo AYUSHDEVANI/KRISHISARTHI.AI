@@ -11,6 +11,16 @@ COPY ./rasa /app/rasa
 COPY ./flask-app /app/flask-app
 RUN pip install -r /app/flask-app/requirements.txt
 
+# Create a virtual environment
+RUN python -m venv /opt/venv
+
+# Activate the virtual environment and install dependencies
+RUN /opt/venv/bin/python -m pip install --upgrade pip && \
+    /opt/venv/bin/pip install -r /app/flask-app/requirements.txt
+
+# Make sure the virtual environment is used by default
+ENV PATH="/opt/venv/bin:$PATH"
+
 # Expose necessary ports
 EXPOSE 5000  
 EXPOSE 5005  
