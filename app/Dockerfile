@@ -15,7 +15,7 @@ COPY ./flask-app /app/flask-app
 # RUN pip install -r /app/flask-app/requirements.txt
 
 # Create a virtual environment in the /app directory
-RUN python -m venv /app/venv
+RUN python3.10 -m venv /app/venv
 
 # Upgrade pip and install Flask app dependencies inside the virtual environment
 RUN /app/venv/bin/python -m pip install --upgrade pip && \
