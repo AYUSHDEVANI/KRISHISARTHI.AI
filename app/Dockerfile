@@ -18,7 +18,7 @@ RUN /app/venv/bin/python -m pip install --upgrade pip
 RUN /app/venv/bin/pip install -r /app/flask-app/requirements.txt
 
 # Install Rasa dependencies
-RUN /app/venv/bin/pip install -r /app/rasa/requirements.txt
+# RUN /app/venv/bin/pip install -r /app/rasa/requirements.txt
 
 # Make sure the virtual environment is used by default
 ENV PATH="/app/venv/bin:$PATH"
