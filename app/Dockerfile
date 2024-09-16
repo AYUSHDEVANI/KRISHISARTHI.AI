@@ -16,4 +16,4 @@ EXPOSE 5000
 EXPOSE 5005  
 
 # Run Rasa and Flask app in the container
-CMD ["sh", "-c", "rasa run -m /app/rasa/models --enable-api --cors '*' & python /appflask-app/app.py"]
+CMD ["sh", "-c", "rasa run -m /app/rasa/models --enable-api --cors '*' & python /app/flask-app/app.py"]
