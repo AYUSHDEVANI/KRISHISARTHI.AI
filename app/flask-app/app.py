@@ -11,6 +11,7 @@ RASA_URL = 'http://localhost:5005/webhooks/rest/webhook'
 def home():
     return render_template("index.html")
 
+#    
 @app.route('/webhook', methods=['POST'])
 def webhook():
     user_message = request.json.get('message')
