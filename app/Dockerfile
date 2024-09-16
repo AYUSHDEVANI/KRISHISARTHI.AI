@@ -1,21 +1,22 @@
-# Use the official Rasa SDK image as a base image
-FROM rasa/rasa:3.6.20-full
+FROM python:3.10.0-stretch AS BASE
 
-# Set the working directory inside the container
+RUN apt-get update \
+    && apt-get --assume-yes --no-install-recommends install \
+        build-essential \
+        curl \
+        git \
+        jq \
+        libgomp1 \
+        vim
+
 WORKDIR /app
 
-# Copy all app files into the container
-COPY . .
+# upgrade pip version
+RUN pip install --no-cache-dir --upgrade pip
 
-# Install additional dependencies if needed (Flask, Gunicorn, etc.)
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install rasa==3.6.2
 
-# Expose necessary ports
-EXPOSE 5000 5005
-
-# Set the environment for production
-ENV FLASK_ENV=production
-ENV PYTHONUNBUFFERED=1
-
-# Run both Flask and Rasa together using Gunicorn for Flask
-CMD ["sh", "-c", "rasa run -m models --enable-api --cors '*' --debug & gunicorn --workers 4 --bind 0.0.0.0:5000 app:app"]
+ADD config.yml config.yml
+ADD domain.yml domain.yml
+ADD credentials.yml credentials.yml
+ADD endpoints.yml endpoints.yml

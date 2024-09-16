@@ -1,20 +1,2 @@
-# This file is used for specifying the endpoints for the Rasa server.
-
-# The URL of the action server.
 action_endpoint:
   url: "http://localhost:5055/webhook"
-
-# The URL of the tracker store. 
-tracker_store:
-  type: SQL
-  dialect: "postgresql"  # or "sqlite" or "mysql"
-  url: "localhost"
-  db: "rasa"
-  username: "user"
-  password: "password"
-
-# This endpoint is used for the Rasa HTTP API.
-http:
-  url: "http://localhost:5005"
-
-# Optionally, configure other endpoints here.
