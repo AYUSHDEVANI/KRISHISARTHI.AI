@@ -2,10 +2,11 @@ version: '3.8'
 
 services:
   rasa:
-    build: .
-    container_name: rasa_bot
+    build:
+      context: .
+      dockerfile: app/Dockerfile
     ports:
       - "5005:5005"
     volumes:
       - ./rasa:/app/rasa
-    command: rasa run --enable-api --cors "*" --port 5005
+    command: ["rasa", "run", "--enable-api", "--cors", "*", "--port", "5005"]

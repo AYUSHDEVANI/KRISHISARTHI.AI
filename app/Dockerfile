@@ -1,20 +1,20 @@
-# Use a base image with Python installed
+# Use the official Python image from the Docker Hub
 FROM python:3.10-slim
 
-# Set the working directory
+# Set the working directory in the container
 WORKDIR /app
 
-# Copy only the requirements file first to leverage Docker cache
-COPY requirements.txt /app/
+# Copy the requirements.txt file into the container
+COPY app/requirements.txt .
 
-# Install dependencies
+# Install the Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the entire application folder to the container
-COPY . /app/
+# Copy the rest of the application code into the container
+COPY app /app
 
-# Expose port for the application
+# Expose the port the app runs on
 EXPOSE 5005
 
-# Start the Rasa server
+# Command to run the Rasa server
 CMD ["rasa", "run", "--enable-api", "--cors", "*", "--port", "5005"]
