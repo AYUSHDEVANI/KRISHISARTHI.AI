@@ -1,3 +1,5 @@
+# Base image with Python 3.8
+FROM python:3.10.0-slim
 
 # Use the official Rasa image as the base
 FROM rasa/rasa:3.6.20
