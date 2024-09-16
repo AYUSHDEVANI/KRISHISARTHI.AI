@@ -14,7 +14,7 @@ from typing import Dict, Text, Any, List
 import requests
 import geocoder
 
-# rasa run --enable-api
+# rasa run --enable-ap
 
 
 class ActionDetectLanguage(Action):
