@@ -9,7 +9,7 @@ COPY ./rasa /app/rasa
 
 # Install additional Python dependencies for your Flask app
 COPY ./flask-app /app/flask-app
-RUN pip install -r /app/flask-app/requirements.txt
+# RUN pip install -r /app/flask-app/requirements.txt
 
 # Create a virtual environment
 RUN python -m venv /opt/venv
