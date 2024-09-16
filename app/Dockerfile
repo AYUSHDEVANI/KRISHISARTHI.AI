@@ -35,7 +35,5 @@ EXPOSE 5000
 EXPOSE 5005  
 
 # Use the start script to run both Rasa and Flask
-CMD ["/app/start.sh"]
-
-
-#
+# Set the entrypoint to start.sh
+ENTRYPOINT ["/app/start.sh"]
