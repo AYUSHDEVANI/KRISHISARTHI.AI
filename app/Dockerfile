@@ -21,12 +21,18 @@ RUN /app/venv/bin/python -m pip install --upgrade pip && \
 # Make sure the virtual environment is used by default
 ENV PATH="/app/venv/bin:$PATH"
 
+# Copy the start script into the container
+COPY start.sh /app/start.sh
+
+# Make the start script executable
+RUN chmod +x /app/start.sh
+
 # Expose necessary ports
 EXPOSE 5000  
 EXPOSE 5005  
 
-# Run Rasa and Flask app in the container
-CMD ["sh", "-c", "rasa run -m /app/rasa/models --enable-api --cors '*' & python /app/flask-app/app.py"]
+# Use the start script to run both Rasa and Flask
+CMD ["/app/start.sh"]
 
 
 #
