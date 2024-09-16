@@ -24,10 +24,12 @@ RUN /app/venv/bin/pip install -r /app/flask-app/requirements.txt
 ENV PATH="/app/venv/bin:$PATH"
 
 # Copy custom action files
-COPY ./rasa/actions.py /app/rasa/actions.py
+
 
 # Switch to root user to change permissions
 USER root
+
+COPY ./rasa/actions.py /app/rasa/actions.py
 
 # Copy the start script into the container
 COPY start.sh /app/start.sh
