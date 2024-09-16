@@ -1,20 +1,45 @@
-# Use the official Python image from the Docker Hub
-FROM python:3.10-slim
+# Base image with Python 3.8
+FROM python:3.10.0-slim
 
-# Set the working directory in the container
+# Use the official Rasa image as the base
+FROM rasa/rasa:3.6.20
+
+# Set the working directory for Rasa
 WORKDIR /app
 
-# Copy the requirements.txt file into the container
-COPY app/requirements.txt .
+# Copy Rasa project files into the container
+COPY ./rasa /app/rasa
 
-# Install the Python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+# Install additional Python dependencies for your Flask app
+COPY ./flask-app /app/flask-app
+# RUN pip install -r /app/flask-app/requirements.txt
 
-# Copy the rest of the application code into the container
-COPY app /app
+# Create a virtual environment in the /app directory
+RUN python -m venv /app/venv
 
-# Expose the port the app runs on
-EXPOSE 5005
+# Upgrade pip and install Flask app dependencies inside the virtual environment
+RUN /app/venv/bin/python -m pip install --upgrade pip && \
+    /app/venv/bin/pip install -r /app/flask-app/requirements.txt
 
-# Command to run the Rasa server
-CMD ["rasa", "run", "--enable-api", "--cors", "*", "--port", "5005"]
+# Make sure the virtual environment is used by default
+ENV PATH="/app/venv/bin:$PATH"
+
+# Switch to root user to change permissions
+USER root
+
+# Copy the start script into the container
+COPY start.sh /app/start.sh
+
+# Make the start script executable
+RUN chmod +x /app/start.sh
+
+# Expose necessary ports
+EXPOSE 5000  
+EXPOSE 5005  
+
+# # Use the start script to run both Rasa and Flask
+# # Set the entrypoint to start.sh
+ENTRYPOINT ["/app/start.sh"]
+
+# Use the entrypoint script to start the services
+# ENTRYPOINT ["/app/start.sh"]
