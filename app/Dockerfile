@@ -29,7 +29,7 @@ ENV PATH="/app/venv/bin:$PATH"
 # Switch to root user to change permissions
 USER root
 
-COPY ./rasa/actions.py /app/rasa/actions.py
+COPY ./rasa/actions/actions.py /app/rasa/actions/actions.py
 
 # Copy the start script into the container
 COPY start.sh /app/start.sh
