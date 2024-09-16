@@ -23,6 +23,9 @@ RUN /app/venv/bin/pip install -r /app/flask-app/requirements.txt
 # Make sure the virtual environment is used by default
 ENV PATH="/app/venv/bin:$PATH"
 
+# Copy custom action files
+COPY ./rasa/actions.py /app/rasa/actions.py
+
 # Switch to root user to change permissions
 USER root
 
