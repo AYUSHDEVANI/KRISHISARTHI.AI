@@ -22,8 +22,9 @@ RUN virtualenv /app/venv
 RUN /app/venv/bin/pip install rasa[full]
 
 # Step 8: Ensure the models directory is correctly placed
-RUN mkdir -p /app/rasa/models
-COPY app/rasa/models /app/rasa/models
+# RUN mkdir -p /app/rasa/models
+
+
 
 # Step 9: Expose the port on which Rasa runs
 EXPOSE 5005
