@@ -17,7 +17,8 @@ RUN python3.10 -m venv /app/venv
 # upgrade pip version
 RUN /app/venv/bin/python -m pip install --upgrade pip
 
-RUN /app/venv/bin/python -m pip install rasa==3.6.2
+# RUN /app/venv/bin/python -m pip install rasa==3.6.2
+RUN /app/venv/bin/pip install -r /requirements.txt
 
 ADD config.yml config.yml
 ADD domain.yml domain.yml
