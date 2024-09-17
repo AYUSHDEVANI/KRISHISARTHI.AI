@@ -2,11 +2,15 @@ version: '3.8'
 
 services:
   rasa:
-    build:
-      context: .
-      dockerfile: app/Dockerfile
+    build: .
+    image: rasa_custom:latest
+    container_name: rasa_chatbot
     ports:
-      - "5005:5005"
+      - "5005:5005"  # Rasa server
+      - "5055:5055"  # Action server
     volumes:
-      - ./rasa:/app/rasa
-    command: ["rasa", "run", "--enable-api", "--cors", "*", "--port", "5005"]
+      - ./app/rasa:/app/rasa
+    command: ["./start.sh"]
+    environment:
+      - TZ=Asia/Kolkata
+    restart: always
