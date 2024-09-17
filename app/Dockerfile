@@ -1,5 +1,5 @@
 # Use the official Rasa image as the base
-FROM rasa/rasa:3.1
+FROM rasa/rasa:3.1.1-full
 
 # Set the working directory for Rasa
 WORKDIR /app
