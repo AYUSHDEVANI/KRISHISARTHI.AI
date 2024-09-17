@@ -2,17 +2,17 @@ FROM python:3.10.1
 
 RUN apt-get update \
     && apt-get --assume-yes --no-install-recommends install \
-        build-essential \
-        curl \
-        git \
-        jq \
-        libgomp1 \
-        vim
+    build-essential \
+    curl \
+    git \
+    jq \
+    libgomp1 \
+    vim
 
 WORKDIR /app
 
 # Create a virtual environment in the /app directory
-RUN python -m venv /app/venv
+RUN python3.10 -m venv /app/venv
 
 # upgrade pip version
 RUN /app/venv/bin/python -m pip install --upgrade pip
