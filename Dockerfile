@@ -11,10 +11,13 @@ RUN apt-get update \
 
 WORKDIR /app
 
-# upgrade pip version
-RUN pip install --no-cache-dir --upgrade pip
+# Create a virtual environment in the /app directory
+RUN python -m venv /app/venv
 
-RUN pip install rasa==3.6.2
+# upgrade pip version
+RUN /app/venv/bin/python -m pip install --upgrade pip
+
+RUN /app/venv/bin/python -m pip install rasa==3.6.2
 
 ADD config.yml config.yml
 ADD domain.yml domain.yml
