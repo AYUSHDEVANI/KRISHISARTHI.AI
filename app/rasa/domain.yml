@@ -45,7 +45,7 @@ slots:
 
   quality:
     type: text
-    # influence_conversation: true
+    influence_conversation: true
     mappings:
       - type: from_entity
         entity: quality
@@ -55,13 +55,13 @@ slots:
     influence_conversation: true
     mappings:
       - type: from_entity
-        entity: crop_name  # slot is filled from the entity crop_name
+        entity: crop_name
+
   fertilizers:
     type: text
     influence_conversation: false
     mappings:
       - type: from_text
-
 
   language:
     type: text
@@ -76,6 +76,7 @@ slots:
       - type: from_intent
         intent: language_change
         value: "ENGLISH"
+
 responses:
   utter_greet:
     - text: |
@@ -83,9 +84,9 @@ responses:
         હેલો! હું આજે તમને ખેતીમાં કેવી રીતે મદદ કરી શકું?
         नमस्ते! मैं आज खेती में आपकी कैसे मदद कर सकता हूँ?
 
-  utter_ask_crop_name:
-    - text: |
-        "Please tell me the crop name you're asking about."
+  # utter_ask_crop_name:
+  #   - text: |
+  #       Please tell me the crop name you're asking about.
 
   utter_ask_crop_type:
     - text: |
@@ -111,11 +112,10 @@ responses:
         {season} માં {crop_type} માટે, તમે કમ્પોસ્ટ જેવા જૈવિક ખાતરો અથવા યુરીયા જેવા રસાયણિક ખાતરોનો ઉપયોગ કરી શકો છો.
         {season} में {crop_type} के लिए, आप खाद जैसे कंपोस्ट या यूरिया जैसे रासायनिक उर्वरकों का उपयोग कर सकते हैं।
 
-  # utter_ask_crop_name:
-  #   - text: "Which crop do you need fertilizer advice for?"
-  #   - text: "किस फसल के लिए आप उर्वरक सुझाव चाहते हैं?"
-  #   - text: "કયા પાક માટે ખાતરના સૂચનો જોઈએ છે?"
-
+  utter_ask_crop_name:
+    - text: "Which crop do you need fertilizer advice for?"
+    - text: "किस फसल के लिए आप उर्वरक सुझाव चाहते हैं?"
+    - text: "કયા પાક માટે ખાતરના સૂચનો જોઈએ છે?"
   utter_crop_advice:
     - text: |
         Based on the {season}, crops like wheat, rice, or pulses are ideal for growing.
@@ -148,16 +148,3 @@ actions:
   - action_quality_check
   - action_greet
   - action_fertilizer_suggestion
-
-# forms:
-#   fertilizer_form:
-#     required_slots:
-#       crop_type:
-#         - type: from_entity
-#           entity: crop_type
-#       soil_type:
-#         type: from_entity
-#         entity: soil_type
-#       season:
-#         type: from_entity
-#         entity: season
