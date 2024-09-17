@@ -13,7 +13,7 @@ def home():
     return render_template("index.html")
 
 #    
-@app.route('/webhook', methods=['POST'])
+@app.route('/webhook', methods=['GET'])
 def webhook():
     user_message = request.json.get('message')
     if not user_message:
