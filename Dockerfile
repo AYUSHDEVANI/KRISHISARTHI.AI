@@ -7,10 +7,10 @@ FROM python:3.10-slim
 WORKDIR /app
 
 # Copy Rasa project files into the container
-COPY ./rasa /app/rasa
+COPY ./rasa /abc.ai/app/rasa
 
 # Install additional Python dependencies for Flask app
-COPY ./flask-app /app/flask-app
+COPY ./flask-app /abc.ai/app/flask-app
 
 # Create a virtual environment in the /app directory
 RUN python3.10 -m venv /app/venv
@@ -31,7 +31,7 @@ ENV PATH="/app/venv/bin:$PATH"
 # Switch to root user to change permissions
 USER root
 
-COPY ./rasa/actions/actions.py /app/rasa/actions/actions.py
+COPY ./rasa/actions/actions.py /abc.ai/app/rasa/actions/actions.py
 
 # Copy the start script into the container
 COPY start.sh /app/start.sh
