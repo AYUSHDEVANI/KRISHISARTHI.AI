@@ -158,7 +158,7 @@ actions:
 #         - type: from_entity
 #           entity: crop_type
 #       soil_type:
-#         - type: from_entity
+#         - type: from_entit
 #           entity: soil_type
 #       season:
 #         - type: from_entity
