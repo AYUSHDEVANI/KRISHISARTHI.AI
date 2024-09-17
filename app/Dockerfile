@@ -1,5 +1,7 @@
 # Use the official Rasa image as the base
-FROM rasa/rasa:3.1.1-full
+# FROM rasa/rasa:3.1.1-full
+# Use a base image with Python 3.10
+FROM python:3.10-slim
 
 # Set the working directory for Rasa
 WORKDIR /app
