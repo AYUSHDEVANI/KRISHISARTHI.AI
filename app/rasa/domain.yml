@@ -151,15 +151,15 @@ actions:
   - action_fertilizer_suggestion
 
 
-forms:
-  fertilizer_form:
-    required_slots:
-      crop_type:
-        - type: from_entity
-          entity: crop_type
-      soil_type:
-        - type: from_entity
-          entity: soil_type
-      season:
-        - type: from_entity
-          entity: season
+# forms:
+#   fertilizer_form:
+#     required_slots:
+#       crop_type:
+#         - type: from_entity
+#           entity: crop_type
+#       soil_type:
+#         - type: from_entity
+#           entity: soil_type
+#       season:
+#         - type: from_entity
+#           entity: season
