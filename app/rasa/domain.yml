@@ -62,6 +62,7 @@ slots:
     influence_conversation: false
     mappings:
       - type: from_text
+        entity: fertilizers
 
   language:
     type: text
@@ -148,3 +149,17 @@ actions:
   - action_quality_check
   - action_greet
   - action_fertilizer_suggestion
+
+
+forms:
+  fertilizer_form:
+    required_slots:
+      crop_type:
+        - type: from_entity
+          entity: crop_type
+      soil_type:
+        - type: from_entity
+          entity: soil_type
+      season:
+        - type: from_entity
+          entity: season

@@ -1,6 +1,6 @@
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
-from textblob import TextBlob
+# from textblob import TextBlob
 from rasa_sdk.types import DomainDict
 from rasa_sdk.events import SlotSet
 
