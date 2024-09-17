@@ -21,8 +21,12 @@ RUN virtualenv /app/venv
 # Step 7: Activate the virtual environment and install Rasa
 RUN /app/venv/bin/pip install rasa[full]
 
-# Step 8: Expose the port on which Rasa runs
+# Step 8: Ensure the models directory is correctly placed
+RUN mkdir -p /app/rasa/models
+COPY app/rasa/models /app/rasa/models
+
+# Step 9: Expose the port on which Rasa runs
 EXPOSE 5005
 
-# Step 9: Default command to run Rasa when the container starts
-CMD ["/app/venv/bin/rasa", "run", "--enable-api", "--cors", "*"]
+# Step 10: Default command to run Rasa when the container starts
+CMD ["/app/venv/bin/rasa", "run", "--model", "/app/rasa/models", "--enable-api", "--cors", "*"]

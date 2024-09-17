@@ -2,15 +2,19 @@ version: '3.8'
 
 services:
   rasa:
-    build: .
+    build: ./  # Assuming Dockerfile is in the root of `app/`
     ports:
       - "5005:5005"
+    volumes:
+      - ./rasa:/app/rasa
     command: >
-      rasa run --enable-api --cors "*"
+      /app/venv/bin/rasa run --model /app/rasa/models --enable-api --cors "*"
 
   action_server:
     build: ./actions
+    volumes:
+      - ./actions:/app/actions
     ports:
       - "5055:5055"
     command: >
-      rasa run actions
+      /app/venv/bin/rasa run actions
