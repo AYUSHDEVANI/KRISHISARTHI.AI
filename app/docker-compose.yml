@@ -6,11 +6,11 @@ services:
     ports:
       - "5005:5005"
     command: >
-      /app/venv/bin/rasa run --enable-api --cors "*"
+      rasa run --enable-api --cors "*"
 
   action_server:
     build: ./actions
     ports:
       - "5055:5055"
     command: >
-      /app/venv/bin/rasa run actions
+      rasa run actions
