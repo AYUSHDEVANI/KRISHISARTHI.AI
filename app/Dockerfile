@@ -1,14 +1,28 @@
-# Base image
-FROM rasa/rasa:3.0.0-full
+# Step 1: Use an official Python base image
+FROM python:3.8-slim
 
-# Copy the Rasa files
-COPY . /app
-
-# Set the working directory
+# Step 2: Set the working directory inside the container
 WORKDIR /app
 
-# Expose port 5005 for the Rasa server
+# Step 3: Copy the project files into the container
+COPY . /app
+
+# Step 4: Install system dependencies (if any are needed for Rasa)
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
+# Step 5: Install virtualenv to manage environments
+RUN pip install virtualenv
+
+# Step 6: Create a virtual environment inside the container
+RUN virtualenv /app/venv
+
+# Step 7: Activate the virtual environment and install Rasa
+RUN /app/venv/bin/pip install rasa[full]
+
+# Step 8: Expose the port on which Rasa runs
 EXPOSE 5005
 
-# Run Rasa server
-CMD ["rasa", "run", "--enable-api", "--cors", "*"]
+# Step 9: Default command to run Rasa when the container starts
+CMD ["/app/venv/bin/rasa", "run", "--enable-api", "--cors", "*"]
