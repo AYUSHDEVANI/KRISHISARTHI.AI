@@ -34,7 +34,7 @@ USER root
 COPY ./rasa/actions/actions.py /abc.ai/app/rasa/actions/actions.py
 
 # Copy the start script into the container
-COPY start.sh /abc.ai/app/start.sh
+COPY ./start.sh /abc.ai/app/start.sh
 
 # Make the start script executable
 RUN chmod +x /abc.ai/app/start.sh
