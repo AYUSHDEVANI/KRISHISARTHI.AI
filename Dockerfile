@@ -34,14 +34,14 @@ USER root
 COPY ./rasa/actions/actions.py /abc.ai/app/rasa/actions/actions.py
 
 # Copy the start script into the container
-COPY ./start.sh /abc.ai/app/start.sh
+COPY start.sh /start.sh
 
 # Make the start script executable
-RUN chmod +x /abc.ai/app/start.sh
+RUN chmod +x /start.sh
 
 # Expose necessary ports
 EXPOSE 5000  
 EXPOSE 5005  
 
 # Use the entrypoint script to start both Rasa and Flask
-ENTRYPOINT ["/abc.ai/app/start.sh"]
+ENTRYPOINT ["/start.sh"]
