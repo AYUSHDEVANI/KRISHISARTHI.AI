@@ -41,8 +41,8 @@
 #  password: password
 #  queue: queue
 
-# action_endpoint:
-#   url: "http://localhost:5055/webhook"
-
 action_endpoint:
-  url: "http://rasa-actions-server/webhook"
+  url: "http://localhost:5055/webhook"
+
+# action_endpoint:
+#   url: "http://rasa-actions-server/webhook"

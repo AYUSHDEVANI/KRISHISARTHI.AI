@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  rasa:
+    image: rasa/rasa:3.0.0-full
+    volumes:
+      - ./:/app
+    ports:
+      - 5005:5005
+    command: >
+      rasa run --enable-api --cors "*"
+
+  action_server:
+    build: ./app/actions  # Path to your custom actions Dockerfile
+    volumes:
+      - ./app/actions:/app/actions
+    ports:
+      - 5055:5055
+    command: >
+      rasa run actions
