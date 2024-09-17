@@ -27,7 +27,7 @@ RUN /app/venv/bin/pip install rasa[full]
 
 
 # Step 9: Expose the port on which Rasa runs
-EXPOSE 5005
+EXPOSE 5050
 
-# Step 10: Default command to run Rasa when the container starts
-CMD ["/app/venv/bin/rasa", "run", "--model", "/app/rasa/models", "--enable-api", "--cors", "*"]
+# Step 9: Default command to run Rasa when the container starts
+CMD ["/app/venv/bin/rasa", "run", "--model", "/app/rasa/models", "--enable-api", "--cors", "*", "--port", "5050"]
