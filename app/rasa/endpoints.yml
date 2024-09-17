@@ -42,7 +42,8 @@
 #  queue: queue
 
 action_endpoint:
-  url: "http://localhost:5055/webhook"
+  url: "http://rasa:5005/webhook"  # Replace with correct service name in Docker Compose or use appropriate URL in production
+
 
   
 
