@@ -8,7 +8,7 @@ flask run --host=0.0.0.0 --port=5000 &
 # Start the Rasa action server in the background
 echo "Starting Rasa action server..."
 cd /app/rasa
-rasa run actions --actions actions &
+rasa run actions --port 5055 &
 
 # Start the Rasa server
 echo "Starting Rasa server..."
