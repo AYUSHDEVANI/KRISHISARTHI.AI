@@ -1,17 +1,18 @@
 # Use the official Rasa image as the base
-FROM rasa/rasa:latest-full
+FROM rasa/rasa:3.0.0
 
-# Copy your Rasa project into the Docker image
-COPY . /app
-
-# Set the working directory
+# Set the working directory for Rasa
 WORKDIR /app
 
-# Install dependencies (if any)
-RUN pip install --no-cache-dir -r requirements.txt
+# Copy Rasa project files into the container
+COPY ./rasa /app/rasa
 
-# Expose Rasa port
-EXPOSE 5005
+# Install additional Python dependencies for your Flask app
+COPY ./flask-app /app/flask-app
+RUN pip install -r /app/flask-app/requirements.txt
 
-# Start the Rasa server with API enabled
-CMD ["rasa", "run", "--enable-api", "--cors", "*", "--port", "5005"]
+# Expose necessary ports
+EXPOSE 5000  
+EXPOSE 5005  
+
+CMD ["sh", "-c", "rasa run -m /app/rasa/models --enable-api --cors '*' & python /appflask-app/app.py"]
