@@ -1,34 +1,18 @@
-# Step 1: Use an official Python base image
-FROM python:3.8-slim
+# Use the official Rasa image as the base
+FROM rasa/rasa:3.0.0
 
-# Step 2: Set the working directory inside the container
+# Set the working directory for Rasa
 WORKDIR /app
 
-# Step 3: Copy the project files into the container
-COPY . /app
+# Copy Rasa project files into the container
+COPY ./rasa /app/rasa
 
-# Step 4: Install system dependencies (if any are needed for Rasa)
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    && rm -rf /var/lib/apt/lists/*
-    
+# Install additional Python dependencies for your Flask app
+COPY ./flask-app /app/flask-app
+RUN pip install -r /app/flask-app/requirements.txt
 
-# Step 5: Install virtualenv to manage environments
-RUN pip install virtualenv
+# Expose necessary ports
+EXPOSE 5000  
+EXPOSE 5005  
 
-# Step 6: Create a virtual environment inside the container
-RUN virtualenv /app/venv
-
-# Step 7: Activate the virtual environment and install Rasa
-RUN /app/venv/bin/pip install rasa[full]
-
-# Step 8: Ensure the models directory is correctly placed
-# RUN mkdir -p /app/rasa/models
-
-
-
-# Step 9: Expose the port on which Rasa runs
-EXPOSE 5050
-
-# Step 9: Default command to run Rasa when the container starts
-CMD ["/app/venv/bin/rasa", "run", "--model", "/app/rasa/models", "--enable-api", "--cors", "*", "--port", "5050"]
+CMD ["sh", "-c", "rasa run -m /app/rasa/models --enable-api --cors '*' & python /appflask-app/app.py"]
