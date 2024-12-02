@@ -1,1 +1,0 @@
-web: sh -c "gunicorn --chdir flask-app --bind 0.0.0.0:8000 app:app & rasa run --enable-api --cors '*' --port 5005"

@@ -1,17 +1,17 @@
-# Base image for Rasa
+# Use the official Rasa image as the base
 FROM rasa/rasa:latest-full
 
-# Copy project files into the Docker image
+# Copy your Rasa project into the Docker image
 COPY . /app
 
 # Set the working directory
 WORKDIR /app
 
-# Install required dependencies
+# Install dependencies (if any)
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Expose the port on which Rasa will run
+# Expose Rasa port
 EXPOSE 5005
 
-# Start Rasa server
+# Start the Rasa server with API enabled
 CMD ["rasa", "run", "--enable-api", "--cors", "*", "--port", "5005"]
