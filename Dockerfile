@@ -19,7 +19,7 @@ EXPOSE 5005 8000
 # Command to run Rasa and Flask simultaneously (or adjust as needed)
 # CMD ["rasa", "run", "--enable-api", "--cors", "*", "--port", "5005"]
 
-COPY ./start.sh /app/start.sh
+COPY ./app/start.sh /app/start.sh
 RUN chmod +x /app/start.sh
 CMD ["/app/start.sh"]
 
