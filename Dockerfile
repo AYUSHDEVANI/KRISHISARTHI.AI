@@ -8,10 +8,10 @@ WORKDIR /app
 COPY ./rasa /app/rasa
 
 # Copy the Flask app directory into the container
-COPY ./flask-app /app/flask-app
+# COPY ./flask-app /app/flask-app
 
 # Install Python dependencies for Flask
-RUN pip install -r /app/flask-app/requirements.txt
+RUN pip install -r /requirements.txt
 
 # Expose Rasa and Flask ports
 EXPOSE 5005 8000
