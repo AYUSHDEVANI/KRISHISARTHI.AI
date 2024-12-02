@@ -3,32 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sarthi.Ai</title>
-    <!-- <link rel="stylesheet" href="styles.css"> -->
+    <title>Sarthi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        #chat-container {
+            width: 360px;
+            max-width: 100%;
+            margin: 50px auto;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            height: 500px;
+        }
+        #chat-header {
+            background-color: #018241;
+            color: white;
+            padding: 4px;
+            text-align: center;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 10px;
+        }
+        #chat-box {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+            border-bottom: 1px solid #ccc;
+        }
+        #chat-input {
+            display: flex;
+            border-top: 1px solid #ccc;
+        }
+        #user-input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-bottom-left-radius: 10px;
+        }
+        #send-button {
+            padding: 10px;
+            border: none;
+            border-radius: 50%;
+            margin-right: 5px;
+            margin-bottom: 7px;
+            margin-top: 3px;
+            background-color: #018241;
+            color: white;
+            /* border-bottom-right-radius: 10px; */
+            cursor: pointer;
+        }
+        .message {
+            margin: 5px 0;
+            display: flex;
+            align-items: center;
+        }
+        .message.user {
+            justify-content: flex-end;
+        }
+        .message.bot {
+            justify-content: flex-start;
+        }
+        .bubble {
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 60%;
+            word-wrap: break-word;
+        }
+        .bubble.user {
+            background-color: #018241;
+            color: white;
+        }
+        .bubble.bot {
+            background-color: #e0e0e0;
+        }
+        #send-button:hover {
+            background-color: #004e27;
+        }
+    </style>
 </head>
 <body>
-    <h1>Chat with Sarthi</h1>
-    <div id="chatbox">
-        <input type="text" id="user_message" placeholder="Type your message">
-        <button onclick="sendMessage()">Send</button>
+    <div id="chat-container">
+        <div id="chat-header">
+            <h2>Sarthi</h2>
+        </div>
+        <div id="chat-box">
+            <div id="chat-messages"></div>
+        </div>
+        <div id="chat-input">
+            <input type="text" id="user-input" placeholder="Type a message...">
+            <button id="send-button">Send</button>
+        </div>
     </div>
-    <div id="chat_output"></div>
-
     <script>
+        const apiUrl = 'https://krishisarthiai-production.up.railway.app/webhooks/rest/webhook'; // Update this to match your Flask endpoint
+
+        document.getElementById('send-button').addEventListener('click', sendMessage);
+        document.getElementById('user-input').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
         function sendMessage() {
-            const userMessage = document.getElementById('user_message').value;
-            fetch('/webhook', {
+            const userInput = document.getElementById('user-input').value;
+            if (userInput.trim() === '') return;
+
+            // Display user message
+            appendMessage('user', userInput);
+
+            // Send user message to Flask server
+            fetch(apiUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ message: userMessage })
+                body: JSON.stringify({ sender: 'user', message: userInput })
             })
             .then(response => response.json())
             .then(data => {
-                let chatOutput = document.getElementById('chat_output');
-                chatOutput.innerHTML = `<p><strong>Sarthi:</strong> ${data[0].text}</p>`;
-            });
+                if (data && Array.isArray(data)) {
+                    data.forEach(response => {
+                        appendMessage('bot', response.text);
+                    });
+                } else {
+                    console.error('Unexpected response format:', data);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+
+            // Clear input field
+            document.getElementById('user-input').value = '';
+        }
+
+        function appendMessage(sender, text) {
+            const messageElement = document.createElement('div');
+            messageElement.className = `message ${sender}`;
+            
+            const bubbleElement = document.createElement('div');
+            bubbleElement.className = `bubble ${sender}`;
+            bubbleElement.textContent = text;
+            
+            messageElement.appendChild(bubbleElement);
+            document.getElementById('chat-messages').appendChild(messageElement);
+            document.getElementById('chat-box').scrollTop = document.getElementById('chat-box').scrollHeight;
         }
     </script>
 </body>
