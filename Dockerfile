@@ -5,13 +5,16 @@ FROM rasa/rasa:3.0.0
 WORKDIR /app
 
 # Copy the Rasa directory into the container
-COPY ./rasa /app/rasa
+COPY ./app/rasa /app/rasa
 
-# Install Python dependencies for Rasa (if required)
-RUN pip install -r /app/rasa/requirements.txt
+# Copy the Flask app directory into the container
+COPY ./app/flask-app /app/flask-app
 
-# Expose Rasa port
-EXPOSE 5005
+# Install Python dependencies for Flask
+RUN pip install -r /app/flask-app/requirements.txt
 
-# Default command to run Rasa server
+# Expose ports for Rasa and Flask
+EXPOSE 5005 8000
+
+# Command to run Rasa and Flask simultaneously (or adjust as needed)
 CMD ["rasa", "run", "--enable-api", "--cors", "*", "--port", "5005"]
