@@ -43,6 +43,9 @@ WORKDIR /app
 # Copy Rasa project files
 COPY ./app/rasa /app/rasa
 
+COPY ./app/rasa/models /app/rasa/models
+
+
 # Switch to root for installation
 USER root
 
