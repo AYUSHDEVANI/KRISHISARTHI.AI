@@ -29,5 +29,5 @@ EXPOSE 5005 8000
 
 # COPY ./app/start.sh /app/start.sh
 # RUN chmod +x /app/start.sh
-CMD ["rasa", "run", "--enable-api", "--cors", "*"]
+CMD ["rasa", "run", "--enable-api"]
 

@@ -1,5 +1,5 @@
 // script.js
-const apiUrl = 'http://localhost:5000/webhooks/rest/webhook'; // Update this to match your Rasa endpoint
+const apiUrl = 'https://vigilant-halibut-jv4gpqwwgrwfwqx-5005.app.github.dev/webhooks/rest/webhook'; // Update this to match your Rasa endpoint
 
 document.getElementById('send-button').addEventListener('click', sendMessage);
 document.getElementById('user-input').addEventListener('keypress', (e) => {
