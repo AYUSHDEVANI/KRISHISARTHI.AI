@@ -42,8 +42,12 @@
 #  queue: queue
 
 action_endpoint:
-  # url: "http://localhost:5055/webhook"
-  url: "https://actionserver-production.up.railway.app/webhook"
+  url: "http://localhost:5055/webhook"
+  # url: https://actionserver-production.up.railway.app/
+
+# action_endpoint:
+#   url: "https://actionserver-production.up.railway.app/webhook"
+#   timeout: 60
 
 # action_endpoint:
 #   url: "http://rasa-actions-server/webhook"
