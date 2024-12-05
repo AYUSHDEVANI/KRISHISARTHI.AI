@@ -60,6 +60,6 @@ USER rasa
 EXPOSE 5005
 
 # Start the Rasa server
-CMD ["run", "--enable-api"]
+CMD ["run", "--enable-api", "--model", "/app/rasa/models/20241205-234108-daring-passenger.tar.gz"]
 
 
