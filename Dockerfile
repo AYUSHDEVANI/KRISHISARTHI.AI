@@ -54,7 +54,7 @@ RUN pip install --no-cache-dir --upgrade pip && \
     if [ -f /app/rasa/requirements.txt ]; then pip install --no-cache-dir -r /app/rasa/requirements.txt; fi
 
 
-COPY ./app/rasa/models /app/rasa/models/
+COPY ./app/rasa/models/ /app/rasa/models/
 
 # Switch back to Rasa user
 USER rasa
