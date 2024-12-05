@@ -4,7 +4,7 @@ Flask-Cors
 # gunicorn==20.1.0
 requests
 #rasa
-#rasa-sdk
+rasa-sdk
 SQLAlchemy==1.4.54
 lingua-language-detector
 geocoder
