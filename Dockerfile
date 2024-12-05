@@ -49,8 +49,14 @@ USER root
 # Install specific Rasa version
 RUN pip install --no-cache-dir rasa==3.6.20
 
+RUN pip install --no-cache-dir --upgrade setuptools
+
+
 # Install dependencies from requirements.txt if present
 RUN if [ -f /app/rasa/requirements.txt ]; then pip install --no-cache-dir -r /app/rasa/requirements.txt; fi
+
+ENV PYTHONUNBUFFERED 1
+ENV PYTHONWARNINGS "ignore"
 
 # Copy models into the container
 COPY ./app/rasa/models/ /app/rasa/models/

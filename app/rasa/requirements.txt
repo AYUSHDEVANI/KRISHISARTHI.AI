@@ -5,6 +5,6 @@ Flask-Cors
 requests
 rasa==3.6.20
 rasa-sdk==3.6.2
-SQLAlchemy==1.4.54
+SQLAlchemy<2.0
 lingua-language-detector
 geocoder
