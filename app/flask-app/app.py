@@ -56,7 +56,7 @@ def chat():
     sender = data.get('sender')
     
     # Rasa server URL
-    rasa_url = 'https://vigilant-halibut-jv4gpqwwgrwfwqx-5005.app.github.dev/webhooks/rest/webhook'
+    rasa_url = 'https://krishisarthiai-production.up.railway.app/webhooks/rest/webhook'
     
     try:
         # Make a POST request to the Rasa server
