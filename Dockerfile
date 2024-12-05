@@ -40,22 +40,22 @@ FROM rasa/rasa:3.0.0
 # Set working directory
 WORKDIR /app
 
-# Copy Rasa project files into the container
+# Copy Rasa project files
 COPY ./app/rasa /app/rasa
 
-# Copy Flask app files into the container (if needed)
-COPY ./app/flask-app /app/flask-app
-
-# Ensure Rasa dependencies are up to date
+# Switch to root for installation
 USER root
-RUN pip install --upgrade pip && \
-    pip install -r /app/rasa/requirements.txt
+
+# Upgrade pip and install dependencies
+RUN pip install --no-cache-dir --upgrade pip && \
+    if [ -f /app/rasa/requirements.txt ]; then pip install --no-cache-dir -r /app/rasa/requirements.txt; fi
 
 # Switch back to Rasa user
 USER rasa
 
-# Expose the ports for Rasa
+# Expose Rasa port
 EXPOSE 5005
 
-# Command to start Rasa server
+# Start Rasa server
 CMD ["run", "--enable-api", "--cors", "*", "--port", "5005"]
+
