@@ -43,7 +43,7 @@ WORKDIR /app
 # Copy Rasa project files
 COPY ./app/rasa /app/rasa
 
-COPY ./app/rasa/models /app/rasa/models
+
 
 
 # Switch to root for installation
@@ -52,6 +52,9 @@ USER root
 # Upgrade pip and install dependencies
 RUN pip install --no-cache-dir --upgrade pip && \
     if [ -f /app/rasa/requirements.txt ]; then pip install --no-cache-dir -r /app/rasa/requirements.txt; fi
+
+
+COPY ./app/rasa/models /app/rasa/models/
 
 # Switch back to Rasa user
 USER rasa
