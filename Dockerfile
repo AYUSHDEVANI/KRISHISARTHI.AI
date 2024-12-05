@@ -60,5 +60,5 @@ USER rasa
 EXPOSE 5005
 
 # Start Rasa server
-CMD ["run", "--enable-api", "--port", "5005"]
+CMD ["run", "--enable-api"]
 
