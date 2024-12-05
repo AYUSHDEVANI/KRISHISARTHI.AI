@@ -43,17 +43,14 @@ WORKDIR /app
 # Copy Rasa project files
 COPY ./app/rasa /app/rasa
 
-
-
-
 # Switch to root for installation
 USER root
 
-# Upgrade pip and install dependencies
+# Upgrade pip and install dependencies if requirements.txt exists
 RUN pip install --no-cache-dir --upgrade pip && \
     if [ -f /app/rasa/requirements.txt ]; then pip install --no-cache-dir -r /app/rasa/requirements.txt; fi
 
-
+# Copy the trained model to the models folder
 COPY ./app/rasa/models/ /app/rasa/models/
 
 # Switch back to Rasa user
@@ -62,7 +59,7 @@ USER rasa
 # Expose Rasa port
 EXPOSE 5005
 
-# Start Rasa server
-CMD ["run", "--enable-api", "--model", "/app/rasa/models/20241205-234108-daring-passenger.tar.gz"]
+# Start the Rasa server
+CMD ["run", "--enable-api"]
 
 
