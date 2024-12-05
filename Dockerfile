@@ -35,7 +35,7 @@
 # CMD ["rasa", "run", "--enable-api", "--port", "5005"]
 
 # Use the Rasa base image
-FROM rasa/rasa:3.0.0
+FROM rasa/rasa:3.6.20
 
 # Set working directory
 WORKDIR /app
@@ -46,11 +46,13 @@ COPY ./app/rasa /app/rasa
 # Switch to root for installation
 USER root
 
-# Upgrade pip and install dependencies if requirements.txt exists
-RUN pip install --no-cache-dir --upgrade pip && \
-    if [ -f /app/rasa/requirements.txt ]; then pip install --no-cache-dir -r /app/rasa/requirements.txt; fi
+# Install specific Rasa version
+RUN pip install --no-cache-dir rasa==3.6.20
 
-# Copy the trained model to the models folder
+# Install dependencies from requirements.txt if present
+RUN if [ -f /app/rasa/requirements.txt ]; then pip install --no-cache-dir -r /app/rasa/requirements.txt; fi
+
+# Copy models into the container
 COPY ./app/rasa/models/ /app/rasa/models/
 
 # Switch back to Rasa user
