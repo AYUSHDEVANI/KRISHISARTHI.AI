@@ -6,7 +6,7 @@ FROM rasa/rasa:3.0.0
 # Set working directory
 WORKDIR /app
 
-# Copy the Rasa directory into the container
+
 COPY ./app/rasa /app/rasa
 
 
