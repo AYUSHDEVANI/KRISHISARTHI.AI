@@ -1,6 +1,6 @@
 rasa==3.6.20
 flask
-flask-cor  # Corrected version of flask-cors
+flask-cors  # Corrected version of flask-cors
 pika==1.2.0
 gunicorn==20.1.0
 psycopg2==2.9.3
